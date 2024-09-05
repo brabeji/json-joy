@@ -4,7 +4,7 @@ import type {PeritextNode, QuillDeltaNode} from '../../../json-crdt-extensions';
 import type {VecNodeExtensionData} from '../../schema/types';
 
 export interface ProxyNode<N extends nodes.JsonNode = nodes.JsonNode> {
-  toApi(): JsonNodeApi<N>;
+  toApi(): JsonNodeApi<N, []>;
   toView(): nodes.JsonNodeView<N>;
 }
 
@@ -15,7 +15,7 @@ export type ProxyNodeVal<N extends nodes.ValNode<any>> = ProxyNode<N> & {
 export type ProxyNodeVec<N extends nodes.VecNode<any>> = ProxyNode<N> & {
   [K in keyof nodes.JsonNodeView<N>]: JsonNodeToProxyNode<nodes.JsonNodeView<N>[K]>;
 } & {
-  toExt: () => JsonNodeApi<VecNodeExtensionData<N>>;
+  toExt: () => JsonNodeApi<VecNodeExtensionData<N>, []>;
 };
 export type ProxyNodeObj<N extends nodes.ObjNode<any>> = ProxyNode<N> & {
   [K in keyof nodes.JsonNodeView<N>]: JsonNodeToProxyNode<(N extends nodes.ObjNode<infer M> ? M : never)[K]>;
