@@ -34,8 +34,8 @@ export class JsonPatchStore<N extends JsonNode = JsonNode<any>> implements SyncS
     return new JsonPatchStore(this.model, this.path.concat(toPath(path)));
   }
 
-  public api(): JsonNodeApi<N> {
-    return this.model.api.find(this.path) as unknown as JsonNodeApi<N>;
+  public api(): JsonNodeApi<N, []> {
+    return this.model.api.find(this.path) as unknown as JsonNodeApi<N, []>;
   }
 
   // ---------------------------------------------------------------- SyncStore
